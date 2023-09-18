@@ -1,12 +1,9 @@
 .DEFAULT_GOAL := help
 
 build:
-	zig build-lib src/math.zig -target wasm32-freestanding -dynamic -rdynamic -O ReleaseFast
-	zig build-lib src/gpu.zig -target wasm32-freestanding -dynamic -rdynamic -O ReleaseFast
-	mv math.wasm site/wasm/math.wasm
-	mv math.wasm.o site/wasm/math.wasm.o
-	mv gpu.wasm site/wasm/gpu.wasm
-	mv gpu.wasm.o site/wasm/gpu.wasm.o
+	zig build-lib src/main.zig -target wasm32-freestanding -dynamic -rdynamic -O ReleaseFast
+	mv main.wasm site/wasm/main.wasm
+	mv main.wasm.o site/wasm/main.wasm.o
 
 run-wasm:
 	node js/main.js

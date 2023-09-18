@@ -1,31 +1,16 @@
-const mathRequest = new XMLHttpRequest();
-mathRequest.open('GET', '../wasm/math.wasm');
-mathRequest.responseType = 'arraybuffer';
-mathRequest.send();
-
-const gpuRequest = new XMLHttpRequest();
-gpuRequest.open('GET', '../wasm/gpu.wasm');
-gpuRequest.responseType = 'arraybuffer';
-gpuRequest.send();
+const request = new XMLHttpRequest();
+request.open('GET', '../wasm/main.wasm');
+request.responseType = 'arraybuffer';
+request.send();
 
 request.onload = function () {
-    var mathResponse = mathRequest.response;
-    var gpuResponse = gpuRequest.response;
-    WebAssembly.instantiate(mathResponse, {
+    var res = request.response;
+    WebAssembly.instantiate(res, {
         env: {
             print: (result) => { console.log(`The result is ${result}.`); }
         }
     }).then(result => {
         var add = result.instance.exports.add;
         add(3, 5);
-    });
-
-    WebAssembly.instantiate(gpuResponse, {
-        env: {
-            print: (result) => { console.log(`The GPU details are ${result}.`); }
-        }
-    }).then(result => {
-        var printGpuDetails = result.instance.exports.printGpuDetails;
-        printGpuDetails();
     });
 };
