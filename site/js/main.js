@@ -9,8 +9,8 @@ gpuRequest.responseType = 'arraybuffer';
 gpuRequest.send();
 
 request.onload = function () {
-    var mathResponse = request.response;
-    var gpuResponse = request.response;
+    var mathResponse = mathRequest.response;
+    var gpuResponse = gpuRequest.response;
     WebAssembly.instantiate(mathResponse, {
         env: {
             print: (result) => { console.log(`The result is ${result}.`); }
