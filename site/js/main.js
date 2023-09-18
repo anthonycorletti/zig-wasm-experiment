@@ -11,6 +11,9 @@ request.onload = function () {
         }
     }).then(result => {
         var add = result.instance.exports.add;
-        add(3, 5);
+        var params = new URLSearchParams(window.location.search);
+        var a = params.get('a') || 0;
+        var b = params.get('b') || 0;
+        add(a, b);
     });
 };

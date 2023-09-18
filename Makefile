@@ -5,12 +5,6 @@ build:
 	mv main.wasm site/wasm/main.wasm
 	mv main.wasm.o site/wasm/main.wasm.o
 
-run-wasm:
-	node js/main.js
-
-open-site:
-	open site/index.html
-
 run-fs-server:
 	python -m http.server 8000 --directory site &
 
